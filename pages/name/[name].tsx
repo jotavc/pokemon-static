@@ -9,6 +9,7 @@ import { Layout } from "../../components/layouts";
 import { Pokemon, PokemonListResponse } from '../../interfaces';
 import { getPokemonInfo, localFavorites } from '../../utils';
 import { pokeApi } from '../../api';
+import { redirect } from 'next/dist/server/api-utils';
 
 
 
@@ -135,7 +136,8 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     paths: pokemonNames.map( name => ({
       params: {name: name}
     })),
-    fallback: false //para enviar error si no exite parametro
+    // fallback: false //para enviar error si no exite parametro
+    fallback: 'blocking'
 
   }
 }
@@ -145,11 +147,25 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const { name } = params as { name: string };
+
+  const pokemon = await getPokemonInfo( name );
+
+  if( !pokemon ){
+
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false
+      }
+    }
+
+  }
   
   return {
     props: {
-      pokemon: await getPokemonInfo( name )
-    }
+      pokemon
+    },
+    revalidate: 86400, // In seconds (86400s = 24h)
   }
 
 }
