@@ -63,9 +63,9 @@ const PokemonByNamePage:FC<Props> = ({pokemon}) => {
           </Grid> 
 
           <Grid xs={ 12 } sm={ 8 }>
-            <Card>
-              <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Text h1 transform='capitalize'>{ pokemon.name }</Text>
+            <Card>            
+              <Card.Header css={{ display: 'flex', justifyContent: 'flex-end' }}>
+                
 
                 <Button
                   color="gradient"
@@ -78,7 +78,7 @@ const PokemonByNamePage:FC<Props> = ({pokemon}) => {
               </Card.Header>
 
               <Card.Body>
-
+              <Text h1 transform='capitalize'>{ pokemon.name }</Text>
                 <Text size={30}>Sprites:</Text>
 
                 <Container direction='row' display='flex' gap={ 0 }>

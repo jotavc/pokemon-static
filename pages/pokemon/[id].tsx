@@ -60,8 +60,7 @@ const Pokemonpage: NextPage<Props> = ({pokemon}) => {
 
             <Grid xs={ 12 } sm={ 8 }>
               <Card>
-                <Card.Header css={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Text h1 transform='capitalize'>{ pokemon.name }</Text>
+                <Card.Header css={{ display: 'flex', justifyContent: 'flex-end' }}>                 
 
                   <Button
                     color="gradient"
@@ -74,7 +73,7 @@ const Pokemonpage: NextPage<Props> = ({pokemon}) => {
                 </Card.Header>
 
                 <Card.Body>
-
+                <Text h1 transform='capitalize'>{ pokemon.name }</Text>
                   <Text size={30}>Sprites:</Text>
 
                   <Container direction='row' display='flex' gap={ 0 }>
